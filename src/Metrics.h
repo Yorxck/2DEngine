@@ -21,6 +21,8 @@ public:
   static const Vector2 zero;
 
   // Methods
+  static const Vector2 intersect(Vector2 startLine1, Vector2 endLine1, Vector2 startLine2, Vector2 endLine2);
+
   Vector2 rotate(int16_t deg);
   float magnitude();
   Vector2 unit();
