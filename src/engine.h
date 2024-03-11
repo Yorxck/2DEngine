@@ -4,6 +4,12 @@
 #include "Object.h"
 #include "Metrics.h"
 
+struct RaycastResult {
+  float distance;
+  Object* hit;
+  Vector2 position;
+};
+
 class engine {
   private:
     int _currentStep = 0;
@@ -18,6 +24,7 @@ class engine {
     void step(); // step forward in simulation
     void stepBack();
     void currentStep();
+    RaycastResult raycast(Vector2 startPosition, Vector2 endPosition);
 }
 
 #endif
