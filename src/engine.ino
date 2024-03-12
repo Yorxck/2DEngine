@@ -1,12 +1,14 @@
-#include "Metrics.h"
+#include "engine.h"
+
+engine simulation;
 
 void setup() {
   Serial.begin(9600);
-  Vector2 a = Vector2::one;
-  a.normalize();
 
-  Serial.print(a.X);
-  Serial.println(a.Y);
+  simulation.setCollision(1, 2, false);
+  simulation.setCollision(1, 2, true);
+
+  Serial.println(simulation.canCollide(2, 1));
 }
 
 void loop() {
