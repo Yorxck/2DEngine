@@ -159,18 +159,18 @@ bool Vector2::operator!=(const Vector2& other) {
 
 // Line
 Vector2 Line::getCenter() {
-    return start.lerp(end, .5f);
+    return start->lerp(*end, .5f);
 }
 
 Vector2 Line::intersect(Line line) {
-    float alpha = ((line.end->X - line.start->X) * (line.start->Y - start->Y) - (line.end->Y - line.start->Y) * (line.start->X - start->X)) / 
-                  ((line.end->X - line.start->X) * (end->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
+    float alpha = ((line.end->X - line.start->X) * (line.start->Y - start->Y) - (line.end->Y - line.start->Y) * (line.start->X - start->X)) /
+        ((line.end->X - line.start->X) * (end->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
 
-    float beta = ((end->X - start->X) * (line.start->Y - start->Y) - (end->Y - start->Y) * (line.start->X - start->X)) / 
-                 ((line.end->X - line.start->X) * (start->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
+    float beta = ((end->X - start->X) * (line.start->Y - start->Y) - (end->Y - start->Y) * (line.start->X - start->X)) /
+        ((line.end->X - line.start->X) * (start->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
 
     if (alpha + beta == 0 || beta == 0)
-        return Vector2.zero;
+        return Vector2::zero;
 
     return Vector2(start->X + alpha * (end->X - start->X), start->Y + alpha * (end->Y - start->Y));
 }
