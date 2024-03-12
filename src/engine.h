@@ -25,6 +25,6 @@ class engine {
     void stepBack();
     void currentStep();
     RaycastResult raycast(Vector2 startPosition, Vector2 endPosition);
-}
+};
 
 #endif
