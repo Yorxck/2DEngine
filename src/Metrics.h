@@ -21,7 +21,7 @@ public:
   static const Vector2 zero;
 
   // Static Methods
-  static Vector2 intersect(Vector2 startLine1, Vector2 endLine1, Vector2 startLine2, Vector2 endLine2);
+  static Vector2 intersect(Vector2 SL1, Vector2 EL1, Vector2 SL2, Vector2 EL2);
 
   // Methods
   Vector2 rotate(int16_t deg);
