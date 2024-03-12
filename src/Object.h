@@ -16,6 +16,7 @@ class Object {
     float bounciness = 1;
     bool anchored = true;
     bool gravity = false;
+    uint8_t collisionLayer;
 
     // Methods
     void onCollide(void (*func)(void));
