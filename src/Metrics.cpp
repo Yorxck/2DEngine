@@ -10,6 +10,10 @@ const Vector2 Vector2::one(1, 1);
 const Vector2 Vector2::zero(0, 0);
 
 // vector2
+Vector Vector2::intersect(Vector2 SL1, Vector2 EL1, Vector2 SL2, Vector2 EL2) {
+  return (0,0);
+}
+
 Vector2 Vector2::rotate(int16_t deg) {
   int16_t rad = -deg * (PI / 180); // deg2rad
   float x = X * cos(rad) - Y * sin(rad);
