@@ -40,8 +40,7 @@ void Collision::setCollision(uint8_t v, uint8_t x, bool _canCollide) {
   }
 
   resizeMatrix(size + 1, -1); // -1 for no deletion
-  uint8_t* insert = new uint8_t[2] {v, x};
-  Rules[size - 1] = insert; // adds new rule to rules
+  Rules[size - 1] = new uint8_t[2] {v, x}; // adds new rule to rules
 }
 
 bool Collision::canCollide(uint8_t v, uint8_t x) {
