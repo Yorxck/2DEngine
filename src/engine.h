@@ -3,6 +3,7 @@
 #include "Arduino.h"
 #include "Object.h"
 #include "Metrics.h"
+#include "Collision.h"
 
 struct RaycastResult {
   float distance;
@@ -10,7 +11,7 @@ struct RaycastResult {
   Vector2 position;
 };
 
-class engine {
+class engine : public Collision {
   private:
     int _currentStep = 0;
   public:
