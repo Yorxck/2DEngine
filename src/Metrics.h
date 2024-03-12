@@ -20,9 +20,10 @@ public:
   static const Vector2 one;
   static const Vector2 zero;
 
-  // Methods
+  // Static Methods
   static Vector2 intersect(Vector2 startLine1, Vector2 endLine1, Vector2 startLine2, Vector2 endLine2);
 
+  // Methods
   Vector2 rotate(int16_t deg);
   float magnitude();
   Vector2 unit();
@@ -34,7 +35,7 @@ public:
   float dot(Vector2 Vector);
   float distance(Vector2 Vector);
 
-  // math operators
+  // Math Operators
   Vector2 operator+(const Vector2 &other);
   Vector2 operator-(const Vector2 &other);
   Vector2 operator*(const Vector2 &other);
@@ -48,7 +49,7 @@ public:
   Vector2& operator*=(const float &value);
   Vector2& operator/=(const float &value);
 
-  // bool operators
+  // Bool Operators
   bool operator==(const Vector2 &other);
   bool operator!=(const Vector2 &other);
 };
