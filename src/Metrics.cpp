@@ -10,10 +10,6 @@ const Vector2 Vector2::one(1, 1);
 const Vector2 Vector2::zero(0, 0);
 
 // vector2
-Vector Vector2::intersect(Vector2 SL1, Vector2 EL1, Vector2 SL2, Vector2 EL2) {
-  return Vector2(0,0);
-}
-
 Vector2 Vector2::rotate(int16_t deg) {
   int16_t rad = -deg * (PI / 180); // deg2rad
   float x = X * cos(rad) - Y * sin(rad);
@@ -35,20 +31,20 @@ Vector2 Vector2::normalized() {
 
 void Vector2::normalize() {
   Vector2 Normalized = normalized();
-  X = Normalized.X;
-  Y = Normalized.Y;
+  X = Normalized->X;
+  Y = Normalized->Y;
 }
 
 Vector2 Vector2::lerp(Vector2 Vector, float a) {
-  float x = X + (Vector.X - X) * a;
-  float y = Y + (Vector.Y - Y) * a;
+  float x = X + (Vector->X - X) * a;
+  float y = Y + (Vector->Y - Y) * a;
   return Vector2(x, y);
 }
 
 Vector2 Vector2::clamp(Vector2 Min, Vector2 Max) {
   return Vector2(
-    constrain(X, Min.X, Max.X),
-    constrain(Y, Min.Y, Max.Y)
+    constrain(X, Min->X, Max->X),
+    constrain(Y, Min->Y, Max->Y)
   );
 }
 
@@ -60,7 +56,7 @@ Vector2 Vector2::absolute() {
 }
 
 float Vector2::dot(Vector2 Vector) {
-  return X * Vector.X + Y * Vector.Y;
+  return X * Vector->X + Y * Vector->Y;
 }
 
 float Vector2::distance(Vector2 Vector) {
@@ -70,29 +66,29 @@ float Vector2::distance(Vector2 Vector) {
 // math operators
 Vector2 Vector2::operator+(const Vector2 &other) {
   return Vector2(
-    X + other.X,
-    Y + other.Y
+    X + other->X,
+    Y + other->Y
   );
 }
 
 Vector2 Vector2::operator-(const Vector2 &other) {
   return Vector2(
-    X - other.X,
-    Y - other.Y
+    X - other->X,
+    Y - other->Y
   );
 }
 
 Vector2 Vector2::operator*(const Vector2 &other) {
   return Vector2(
-    X * other.X,
-    Y * other.Y
+    X * other->X,
+    Y * other->Y
   );
 }
 
 Vector2 Vector2::operator/(const Vector2 &other) {
   return Vector2(
-    X / other.X,
-    Y / other.Y
+    X / other->X,
+    Y / other->Y
   );
 }
 
@@ -111,29 +107,29 @@ Vector2 Vector2::operator/(const float &value) {
 }
 
 Vector2& Vector2::operator+=(const Vector2 &other) {
-  this -> X += other.X;
-  this -> Y += other.Y;
+  this -> X += other->X;
+  this -> Y += other->Y;
 
   return *this;
 }
 
 Vector2& Vector2::operator-=(const Vector2 &other) {
-  this -> X -= other.X;
-  this -> Y -= other.Y;
+  this -> X -= other->X;
+  this -> Y -= other->Y;
 
   return *this;
 }
 
 Vector2& Vector2::operator*=(const Vector2 &other) {
-  this -> X *= other.X;
-  this -> Y *= other.Y;
+  this -> X *= other->X;
+  this -> Y *= other->Y;
 
   return *this;
 }
 
 Vector2& Vector2::operator/=(const Vector2 &other) {
-  this -> X /= other.X;
-  this -> Y /= other.Y;
+  this -> X /= other->X;
+  this -> Y /= other->Y;
 
   return *this;
 }
@@ -154,9 +150,29 @@ Vector2& Vector2::operator/=(const float &value) {
 
 // bool operators
 bool Vector2::operator==(const Vector2 &other) {
-  return X == other.X && Y == other.Y;
+  return X == other->X && Y == other->Y;
 }
 
 bool Vector2::operator!=(const Vector2 &other) {
-  return X != other.X || Y != other.Y;
+  return X != other->X || Y != other->Y;
+}
+
+
+
+// Line
+Vector2 Line::getCenter() {
+    return start.lerp(end, .5f);
+}
+
+Vector2 Line::intersect(Line line) {
+    float alpha = ((line.end->X - line.start->X) * (line.start->Y - start->Y) - (line.end->Y - line.start->Y) * (line.start->X - start->X)) / 
+                  ((line.end->X - line.start->X) * (end->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
+
+    float beta = ((end->X - start->X) * (line.start->Y - start->Y) - (end->Y - start->Y) * (line.start->X - start->X)) / 
+                 ((line.end->X - line.start->X) * (start->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
+
+    if (alpha + beta == 0 || beta == 0)
+        return Vector2.zero;
+
+    return Vector2(start->X + alpha * (end->X - start->X), start->Y + alpha * (end->Y - start->Y));
 }

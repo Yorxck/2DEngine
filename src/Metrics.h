@@ -20,9 +20,6 @@ public:
   static const Vector2 one;
   static const Vector2 zero;
 
-  // Static Methods
-  static Vector2 intersect(Vector2 SL1, Vector2 EL1, Vector2 SL2, Vector2 EL2);
-
   // Methods
   Vector2 rotate(int16_t deg);
   float magnitude();
@@ -52,6 +49,17 @@ public:
   // Bool Operators
   bool operator==(const Vector2 &other);
   bool operator!=(const Vector2 &other);
+};
+
+struct Line {
+public:
+	Line(Vector2 Start, Vector2 End) : start(Start), end(End) {}
+	Vector2 getCenter();
+	Vector2 intersect(Line line);
+
+private:
+	Vector2* start;
+	Vector2* end;
 };
 
 #endif
