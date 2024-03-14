@@ -4,5 +4,9 @@
 
 // Object functions
 void Object::onCollide(void (*func)(void)) {
-  Callback = func;
+  onCollideCallback = func;
+}
+
+void Object::onMove(void (*func)(void)) {
+  onMoveCallback = func;
 }

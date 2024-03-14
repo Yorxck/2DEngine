@@ -5,7 +5,8 @@
 
 class Object {
   protected:
-    void (*Callback)(void);
+    void (*onCollideCallback)(void);
+    void (*onMoveCallback)(void);
 
   public:
     // Properties
@@ -19,6 +20,7 @@ class Object {
     uint8_t collisionLayer;
 
     // Methods
+    void onMove(void(*func)());
     void onCollide(void (*func)(void));
 };
 

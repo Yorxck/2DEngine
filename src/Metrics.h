@@ -53,13 +53,17 @@ public:
 
 struct Line {
 public:
-	Line(Vector2* Start, Vector2* End) : start(Start), end(End) {}
+	Line(Vector2* Start, Vector2* End, Vector2* ObjectCenter) : start(Start), end(End), objectCenter(ObjectCenter) {}
 	Vector2 getCenter();
+  Vector2 getNormal();
 	Vector2 intersect(Line line);
+  Vector2 getStart();
+  Vector2 getEnd();
 
 private:
 	Vector2* start;
 	Vector2* end;
+  Vector2* objectCenter;
 };
 
 #endif

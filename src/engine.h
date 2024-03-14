@@ -2,6 +2,7 @@
 #define ENGINE_H
 #include "Arduino.h"
 #include "Object.h"
+#include "Bounds.h"
 #include "Metrics.h"
 #include "Collision.h"
 
@@ -16,7 +17,7 @@ class engine : public Collision {
     int _currentStep = 0;
   public:
     // Constructor
-    engine();
+    engine() {}
 
     //Properties
     float gravity = 2;
