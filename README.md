@@ -1,5 +1,7 @@
 # 2D Engine for arduino
 
+this is a library to create 2d games and detect collisions between diffirent obejcts.
+
 ## Features
 > Collision layers
 
