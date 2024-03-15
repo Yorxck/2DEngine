@@ -8,6 +8,7 @@ class Object {
   protected:
     void (*onCollideCallback)(void);
     void (*onMoveCallback)(void);
+    Vector2 position;
 
   public:
     // Constructer
@@ -15,7 +16,6 @@ class Object {
 
     // Properties
     Bounds bounds;
-    Vector2 position;
     Vector2 velocity;
     float rotation;
     float mass;
@@ -27,6 +27,8 @@ class Object {
     // Methods
     void onMove(void(*func)());
     void onCollide(void (*func)(void));
+    void SetPosition(Vector2 Position);
+    Vector2* GetPosition();
 };
 
 class Rectangle : Object {

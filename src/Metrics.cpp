@@ -162,6 +162,10 @@ Vector2 Line::getCenter() {
     return start->lerp(*end, .5f);
 }
 
+float Line::getSize() {
+  return (start->operator-(*end)).magnitude();
+}
+
 Vector2 Line::intersect(Line line) {
     float alpha = ((line.end->Y - line.start->X) * (line.start->Y - start->Y) - (line.end->Y - line.start->Y) * (line.start->X - start->X)) /
         ((line.end->Y - line.start->X) * (end->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));

@@ -5,7 +5,7 @@ class Bounds {
 public:
   // Constructer
   Bounds() {}
-  Bounds(Vector2 Points[], Vector2* center);
+  Bounds(Vector2 Points[], Vector2* Center);
   
   // Static 
   static const Vector2 Square[4];

@@ -29,10 +29,10 @@ const Vector2 Bounds::Circle[12] = {
   Vector2(-.5f, .866f),
 };
 
-Bounds::Bounds(Vector2 PointsOffset[], Vector2* center) {
+Bounds::Bounds(Vector2 PointsOffset[], Vector2* Center) {
+  center = Center;
   uint8_t pointAmount = sizeof(PointsOffset) / sizeof(int);
   points[pointAmount];
-  pointsOffset[pointAmount];
   memcpy(&pointsOffset, &PointsOffset, pointAmount);
   delete[] PointsOffset;
 
