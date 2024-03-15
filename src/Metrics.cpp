@@ -1,6 +1,10 @@
 #include "Metrics.h"
 #include "Arduino.h"
 
+/*
+    Vector2 Class defentitions
+*/
+
 // define static members
 const Vector2 Vector2::up(0, 1);
 const Vector2 Vector2::down(0, -1);
@@ -9,7 +13,7 @@ const Vector2 Vector2::right(1, 0);
 const Vector2 Vector2::one(1, 1);
 const Vector2 Vector2::zero(0, 0);
 
-// vector2
+// functions
 Vector2 Vector2::rotate(int16_t deg) {
     int16_t rad = -deg * (PI / 180); // deg2rad
     float x = X * cos(rad) - Y * sin(rad);
@@ -107,43 +111,50 @@ Vector2 Vector2::operator/(const float& value) {
 }
 
 Vector2& Vector2::operator+=(const Vector2& other) {
-    this->X += other.X;
-    this->Y += other.Y;
+    this -> X += other.X;
+    this -> Y += other.Y;
 
     return *this;
 }
 
 Vector2& Vector2::operator-=(const Vector2& other) {
-    this->X -= other.X;
-    this->Y -= other.Y;
+    this -> X -= other.X;
+    this -> Y -= other.Y;
 
     return *this;
 }
 
 Vector2& Vector2::operator*=(const Vector2& other) {
-    this->X *= other.X;
-    this->Y *= other.Y;
+    this -> X *= other.X;
+    this -> Y *= other.Y;
 
     return *this;
 }
 
 Vector2& Vector2::operator/=(const Vector2& other) {
-    this->X /= other.X;
-    this->Y /= other.Y;
-
+    this -> X /= other.X;
+    this -> Y /= other.Y;
+ 
     return *this;
 }
 
 Vector2& Vector2::operator*=(const float& value) {
-    this->X *= value;
-    this->Y *= value;
+    this -> X *= value;
+    this -> Y *= value;
 
     return *this;
 }
 
 Vector2& Vector2::operator/=(const float& value) {
-    this->X /= value;
-    this->Y /= value;
+    this -> X /= value;
+    this -> Y /= value;
+
+    return *this;
+}
+
+Vector2& Vector2::operator=(const IVector2 &other) {
+    this -> X = other.X;
+    this -> Y = other.Y;
 
     return *this;
 }
@@ -157,7 +168,176 @@ bool Vector2::operator!=(const Vector2& other) {
     return X != other.X || Y != other.Y;
 }
 
-// Line
+/*
+    IVector2 Class defentitions
+*/
+
+// define static members
+const IVector2 IVector2::up(0, 1);
+const IVector2 IVector2::down(0, -1);
+const IVector2 IVector2::left(-1, 0);
+const IVector2 IVector2::right(1, 0);
+const IVector2 IVector2::one(1, 1);
+const IVector2 IVector2::zero(0, 0);
+
+// functions
+IVector2 IVector2::rotate(int16_t deg) {
+    int16_t rad = -deg * (PI / 180); // deg2rad
+    int16_t x = round(X * cos(rad) - Y * sin(rad));
+    int16_t y = round(X * sin(rad) + Y * cos(rad));
+    return IVector2(x, y);
+}
+
+float IVector2::magnitude() {
+    return sqrt(pow(X, 2) + pow(Y, 2));
+}
+
+IVector2 IVector2::unit() {
+    return (*this / magnitude());
+}
+
+IVector2 IVector2::normalized() {
+    return (*this / magnitude());
+}
+
+void IVector2::normalize() {
+    IVector2 Normalized = normalized();
+    X = Normalized.X;
+    Y = Normalized.Y;
+}
+
+IVector2 IVector2::lerp(IVector2 Vector, float a) {
+    float x = round(X + (Vector.X - X) * a);
+    float y = round(Y + (Vector.Y - Y) * a);
+    return IVector2(x, y);
+}
+
+IVector2 IVector2::clamp(IVector2 Min, IVector2 Max) {
+    return IVector2(
+        constrain(X, Min.X, Max.X),
+        constrain(Y, Min.Y, Max.Y)
+    );
+}
+
+IVector2 IVector2::absolute() {
+    return IVector2(
+        abs(X),
+        abs(Y)
+    );
+}
+
+float IVector2::dot(IVector2 Vector) {
+    return X * Vector.X + Y * Vector.Y;
+}
+
+float IVector2::distance(IVector2 Vector) {
+    return (*this - Vector).magnitude();
+}
+
+// math operators
+IVector2 IVector2::operator+(const IVector2& other) {
+    return IVector2(
+        X + other.X,
+        Y + other.Y
+    );
+}
+
+IVector2 IVector2::operator-(const IVector2& other) {
+    return IVector2(
+        X - other.X,
+        Y - other.Y
+    );
+}
+
+IVector2 IVector2::operator*(const IVector2& other) {
+    return IVector2(
+        X * other.X,
+        Y * other.Y
+    );
+}
+
+IVector2 IVector2::operator/(const IVector2& other) {
+    return IVector2(
+        X / other.X,
+        Y / other.Y
+    );
+}
+
+IVector2 IVector2::operator*(const float& value) {
+    return IVector2(
+        X * value,
+        Y * value
+    );
+}
+
+IVector2 IVector2::operator/(const float& value) {
+    return IVector2(
+        X / value,
+        Y / value
+    );
+}
+
+IVector2& IVector2::operator+=(const IVector2& other) {
+    this -> X += other.X;
+    this -> Y += other.Y;
+
+    return *this;
+}
+
+IVector2& IVector2::operator-=(const IVector2& other) {
+    this -> X -= other.X;
+    this -> Y -= other.Y;
+
+    return *this;
+}
+
+IVector2& IVector2::operator*=(const IVector2& other) {
+    this -> X *= other.X;
+    this -> Y *= other.Y;
+
+    return *this;
+}
+
+IVector2& IVector2::operator/=(const IVector2& other) {
+    this -> X /= other.X;
+    this -> Y /= other.Y;
+ 
+    return *this;
+}
+
+IVector2& IVector2::operator*=(const float& value) {
+    this -> X *= value;
+    this -> Y *= value;
+
+    return *this;
+}
+
+IVector2& IVector2::operator/=(const float& value) {
+    this -> X /= value;
+    this -> Y /= value;
+
+    return *this;
+}
+
+IVector2& IVector2::operator=(const Vector2 &other) {
+    this -> X = round(other.X);
+    this -> Y = round(other.Y);
+
+    return *this;
+}
+
+// bool operators
+bool IVector2::operator==(const IVector2& other) {
+    return X == other.X && Y == other.Y;
+}
+
+bool IVector2::operator!=(const IVector2& other) {
+    return X != other.X || Y != other.Y;
+}
+
+/*
+    Line functions
+*/
 Vector2 Line::getCenter() {
     return start->lerp(*end, .5f);
 }
