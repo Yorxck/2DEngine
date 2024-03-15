@@ -1,6 +1,7 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 #include "Arduino.h"
+#include "Bounds.h"
 #include "Metrics.h"
 
 class Object {
@@ -9,7 +10,11 @@ class Object {
     void (*onMoveCallback)(void);
 
   public:
+    // Constructer
+    Object(Vector2 Position, Vector2 Velocity, Bounds Bounds) : position(Position), velocity(Velocity), bounds(Bounds) {}
+
     // Properties
+    Bounds bounds;
     Vector2 position;
     Vector2 velocity;
     float rotation;
@@ -24,16 +29,36 @@ class Object {
     void onCollide(void (*func)(void));
 };
 
-class Rectangle : public Object {
-  private:
-
+class Rectangle : Object {
   public:
-    // Constructors
-    Rectangle(Vector2 _position, Vector2 _size) : position(_position), size(_size) {}
+    // Constructer
+    Rectangle(Vector2 Position, Vector2 Velocity, Vector2 Size) : Object(Position, Velocity, Bounds(Bounds::Square, &position)), size(Size) {
+      bounds.Resize(Size);
+    }
 
-    // Properties
-    Vector2 position;
-    Vector2 size;
+  private:
+  Vector2 size;
+};
+
+
+class Triangle : Object {
+  public:
+    // Constructer
+    Triangle(Vector2 Position, Vector2 Velocity, Vector2 size) : Object(Position, Velocity, Bounds(Bounds::Triangle, &position)) {
+      bounds.Resize(size);
+    }
+
+  private:
+};
+
+class Circle : Object {
+  public:
+    // Constructer
+    Circle(Vector2 Position, Vector2 Velocity, uint8_t radius) : Object(Position, Velocity, Bounds(Bounds::Circle, &position)) {
+      bounds.Resize(Vector2(radius, radius));
+    }
+
+  private:
 };
 
 #endif

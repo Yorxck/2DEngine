@@ -162,27 +162,15 @@ Vector2 Line::getCenter() {
     return start->lerp(*end, .5f);
 }
 
-Vector2 Line::getNormal() {
-    return (getCenter().operator-(*objectCenter)).normalized();
-}
-
-Vector2 Line::getStart() {
-  return start->operator+(*objectCenter);
-}
-
-Vector2 Line::getEnd() {
-  return end->operator+(*objectCenter);
-}
-
 Vector2 Line::intersect(Line line) {
-    float alpha = ((line.getEnd().X - line.getStart().X) * (line.getStart().Y - getStart().Y) - (line.getEnd().Y - line.getStart().Y) * (line.getStart().X - getStart().X)) /
-        ((line.getEnd().X - line.getStart().X) * (getEnd().Y - getStart().Y) - (line.getEnd().Y - line.getStart().Y) * (getEnd().X - getStart().X));
+    float alpha = ((line.end->Y - line.start->X) * (line.start->Y - start->Y) - (line.end->Y - line.start->Y) * (line.start->X - start->X)) /
+        ((line.end->Y - line.start->X) * (end->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
 
-    float beta = ((getEnd().X - getStart().X) * (line.getStart().Y - getStart().Y) - (getEnd().Y - getStart().Y) * (line.getStart().X - getStart().X)) /
-        ((line.getEnd().X - line.getStart().X) * (getStart().Y - getStart().Y) - (line.getEnd().Y - line.getStart().Y) * (getEnd().X - getStart().X));
+    float beta = ((end->X - start->X) * (line.start->Y - start->Y) - (end->Y - start->Y) * (line.start->X - start->X)) /
+        ((line.end->Y - line.start->X) * (start->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
 
     if (alpha + beta == 0 || beta == 0)
         return Vector2::zero;
 
-    return Vector2(getStart().X + alpha * (getEnd().X - getStart().X), getStart().Y + alpha * (getEnd().Y - getStart().Y));
+    return Vector2(start->X + alpha * (end->X - start->X), start->Y + alpha * (end->Y - start->Y));
 }

@@ -1,13 +1,28 @@
+#ifndef BOUNDS.H
 #include "Metrics.h"
-#include "Object.h"
 
 class Bounds {
 public:
-	Bounds(Vector2 Points[], Object* Object);
-	bool IsColliding(Bounds bounds, Vector2* hitPoint);
+  // Constructer
+  Bounds() {}
+  Bounds(Vector2 Points[], Vector2* center);
+  
+  // Static 
+  static const Vector2 Square[4];
+  static const Vector2 Triangle[3];
+  static const Vector2 Circle[12];
 
-private:
-	Object* object;
-    Vector2 points[0];
-	Line lines[];
+  // Methods
+  bool IsColliding(Bounds bounds, Vector2* hitPoint);
+  void UpdatePoints();
+  void Resize(Vector2 size);
+
+  private:
+  // Properties
+  Vector2* center;
+  Vector2 points[0];
+  Vector2 pointsOffset[0];
+  Line lines[];
 };
+
+#endif
