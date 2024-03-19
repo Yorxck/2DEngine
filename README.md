@@ -7,12 +7,19 @@ this is a library to create 2d games and detect collisions between diffirent obe
 
 ## Documentation
 
+## engine
+
 ### Basics
 to include and initialize the library you can do the following
 ```cpp
 #include "engine.h"
 
 engine simulation;
+```
+
+to get the current fps the engine is running at you can use
+```cpp
+simulation.fps();
 ```
 
 ### Collision layers
