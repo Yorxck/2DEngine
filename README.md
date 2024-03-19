@@ -19,7 +19,7 @@ engine simulation;
 
 to get the current fps the engine is running at you can use
 ```cpp
-simulation.fps();
+uint16_t fps = simulation.fps();
 ```
 
 ### Collision layers
