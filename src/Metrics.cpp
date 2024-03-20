@@ -162,14 +162,6 @@ Vector2 Line::getCenter() {
     return start->lerp(*end, .5f);
 }
 
-Vector2 Line::getNormal(Vector2* center) {
-    return (getCenter().operator-(center)).normalized();
-}
-
-float Line::getSize() {
-  return (start->operator-(*end)).magnitude();
-}
-
 Vector2 Line::intersect(Line line) {
     float alpha = ((line.end->Y - line.start->X) * (line.start->Y - start->Y) - (line.end->Y - line.start->Y) * (line.start->X - start->X)) /
         ((line.end->Y - line.start->X) * (end->Y - start->Y) - (line.end->Y - line.start->Y) * (end->X - start->X));
@@ -181,4 +173,25 @@ Vector2 Line::intersect(Line line) {
         return Vector2::zero;
 
     return Vector2(start->X + alpha * (end->X - start->X), start->Y + alpha * (end->Y - start->Y));
+}
+
+Vector2 Line::getNormal(Vector2* center) {
+    return (center->operator-(getCenter())).normalized();
+}
+
+Vector2* Line::getPointsAlongLine() {
+  float lineSize = getSize();
+  uint8_t pointAmount = ceil(lineSize - 1);
+
+  Vector2* points = new Vector2[pointAmount];
+
+  for(uint8_t i = 1; i <= pointAmount; i++) {
+    points[i] = start->lerp(*end, (1 / (pointAmount + 1)) * i);
+  }
+
+  return points;
+}
+
+float Line::getSize() {
+  return (start->operator-(*end)).magnitude();
 }

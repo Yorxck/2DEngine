@@ -23,8 +23,8 @@ public:
   Vector2* center;
   Vector2 points[0];
   Vector2 pointsOffset[0];
+  Line lines[0];
   Line* collisionLines;
-  Line lines[];
 };
 
 #endif

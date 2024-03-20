@@ -57,6 +57,7 @@ public:
 	Vector2 getCenter();
 	Vector2 intersect(Line line);
 	Vector2 getNormal(Vector2* center);
+  Vector2* getPointsAlongLine();
   float getSize();
 
 private:
