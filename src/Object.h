@@ -31,24 +31,25 @@ class Object {
     Vector2* GetPosition();
 };
 
-class Rectangle : Object {
+class Rectangle : public Object {
   public:
     // Constructer
     Rectangle(Vector2 Position, Vector2 Velocity, Vector2 Size) : Object(Position, Velocity, Bounds(Bounds::Square, &position)), size(Size) {
       bounds.Resize(Size);
     }
+  Vector2 size;
 
   private:
-  Vector2 size;
 };
 
 
-class Triangle : Object {
+class Triangle : public Object {
   public:
     // Constructer
     Triangle(Vector2 Position, Vector2 Velocity, Vector2 size) : Object(Position, Velocity, Bounds(Bounds::Triangle, &position)) {
       bounds.Resize(size);
     }
+  Vector2 size;
 
   private:
 };

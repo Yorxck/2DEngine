@@ -59,10 +59,10 @@ public:
 	Vector2 getNormal(Vector2* center);
   Vector2* getPointsAlongLine();
   float getSize();
-
-private:
 	Vector2* start;
 	Vector2* end;
+
+private:
 };
 
 #endif

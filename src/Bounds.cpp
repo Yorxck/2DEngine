@@ -100,7 +100,7 @@ bool Bounds::IsColliding(Bounds bounds, Vector2* hitPoint) {
   };
 
   for (uint8_t i = 0; i < collisionLineAmount; i++) {
-    if(isInBounds(collisionLines[i].start) || isInBounds(collisionLines[i].end))
+    if(isInBounds(*collisionLines[i].start) || isInBounds(*collisionLines[i].end))
         return true;
 
     if(collisionLines[i].getSize() > 1) {
