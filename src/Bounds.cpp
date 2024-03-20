@@ -48,7 +48,16 @@ Bounds::Bounds(Vector2 PointsOffset[], Vector2* Center) {
   }
 }
 
+void Bounds::RecalculateCollisionLines(Vector2 direction) {
+    uint8_t lineAmount = sizeof(lines) / sizeof(int);
+
+    for(int i = 0; i < lineAmount; i++) {
+        
+    } 
+}
+
 bool Bounds::IsColliding(Bounds bounds, Vector2* hitPoint) {
+    
 
   return false;
 }

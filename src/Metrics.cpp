@@ -162,6 +162,10 @@ Vector2 Line::getCenter() {
     return start->lerp(*end, .5f);
 }
 
+Vector2 Line::getNormal(Vector2* center) {
+    return (getCenter().operator-(center)).normalized();
+}
+
 float Line::getSize() {
   return (start->operator-(*end)).magnitude();
 }

@@ -16,12 +16,14 @@ public:
   bool IsColliding(Bounds bounds, Vector2* hitPoint);
   void UpdatePoints();
   void Resize(Vector2 size);
+  void RecalulateCollisionLines(Vector2* direction);
 
   private:
   // Properties
   Vector2* center;
   Vector2 points[0];
   Vector2 pointsOffset[0];
+  Line* collisionLines;
   Line lines[];
 };
 
