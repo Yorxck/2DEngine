@@ -3,6 +3,6 @@
 #include "Object.h"
 
 // Object functions
-void Object::onCollide(void (*func)(void)) {
-  Callback = func;
+void Object::onCollide(Callback _callback) {
+  callback = _callback;
 }
