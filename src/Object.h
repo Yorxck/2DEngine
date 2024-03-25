@@ -3,9 +3,11 @@
 #include "Arduino.h"
 #include "Metrics.h"
 
+typedef void (*Callback)();
+
 class Object {
   protected:
-    void (*Callback)(void);
+    Callback callback;
 
   public:
     // Properties
@@ -19,7 +21,7 @@ class Object {
     uint8_t collisionLayer;
 
     // Methods
-    void onCollide(void (*func)(void));
+    void onCollide(Callback _callback);
 };
 
 class Rectangle : public Object {
